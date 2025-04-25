@@ -12,8 +12,26 @@ function DoctorListing() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [specialtiesList, setSpecialtiesList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const doctorsPerPage = 5;
   
   const { filters, setFilters, filteredDoctors } = useFilters(doctors);
+  
+  const indexOfLastDoctor = currentPage * doctorsPerPage;
+  const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
+  const currentDoctors = filteredDoctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+  const totalPages = Math.ceil(filteredDoctors.length / doctorsPerPage);
+  
+  const paginate = (pageNumber) => {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
+      setCurrentPage(pageNumber);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
   
   useEffect(() => {
     const getDoctors = async () => {
@@ -56,6 +74,106 @@ function DoctorListing() {
   
   const handleSearchChange = (searchTerm) => {
     setFilters(prev => ({ ...prev, searchTerm }));
+  };
+  
+  const renderPaginationButtons = () => {
+    if (totalPages <= 1) return null;
+    
+    const buttons = [];
+    
+    buttons.push(
+      <button
+        key="prev"
+        onClick={() => paginate(currentPage - 1)}
+        disabled={currentPage === 1}
+        className={`px-3 py-1 rounded ${
+          currentPage === 1 
+            ? 'bg-gray-200 text-gray-500 cursor-not-allowed' 
+            : 'bg-white text-blue-500 hover:bg-blue-50'
+        } border`}
+        aria-label="Previous page"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+    );
+    
+    const pageNumbers = [];
+    
+    pageNumbers.push(1);
+    
+    if (currentPage > 3) {
+      pageNumbers.push('...');
+    }
+    
+    if (currentPage > 2) {
+      pageNumbers.push(currentPage - 1);
+    }
+    
+    if (currentPage !== 1 && currentPage !== totalPages) {
+      pageNumbers.push(currentPage);
+    }
+    
+    if (currentPage < totalPages - 1) {
+      pageNumbers.push(currentPage + 1);
+    }
+    
+    if (currentPage < totalPages - 2) {
+      pageNumbers.push('...');
+    }
+    
+    if (totalPages > 1) {
+      pageNumbers.push(totalPages);
+    }
+    
+    pageNumbers.forEach((number, index) => {
+      if (number === '...') {
+        buttons.push(
+          <span 
+            key={`ellipsis-${index}`} 
+            className="px-3 py-1 text-gray-500"
+          >
+            ...
+          </span>
+        );
+      } else {
+        buttons.push(
+          <button
+            key={number}
+            onClick={() => paginate(number)}
+            className={`px-3 py-1 border rounded mx-1 ${
+              currentPage === number
+                ? 'bg-blue-500 text-white'
+                : 'bg-white text-blue-500 hover:bg-blue-50'
+            }`}
+            aria-current={currentPage === number ? 'page' : undefined}
+          >
+            {number}
+          </button>
+        );
+      }
+    });
+    
+    buttons.push(
+      <button
+        key="next"
+        onClick={() => paginate(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className={`px-3 py-1 rounded ${
+          currentPage === totalPages 
+            ? 'bg-gray-200 text-gray-500 cursor-not-allowed' 
+            : 'bg-white text-blue-500 hover:bg-blue-50'
+        } border`}
+        aria-label="Next page"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+    );
+    
+    return buttons;
   };
   
   return (
@@ -109,12 +227,26 @@ function DoctorListing() {
               </div>
             ) : (
               <div>
-                <div className="mb-4 text-gray-600">
-                  Found {filteredDoctors.length} doctors
+                <div className="mb-4 flex justify-between items-center">
+                  <span className="text-gray-600">
+                    Found {filteredDoctors.length} doctors
+                  </span>
+                  <span className="text-gray-500 text-sm">
+                    Page {currentPage} of {totalPages}
+                  </span>
                 </div>
-                {filteredDoctors.map((doctor, index) => (
+                
+                {currentDoctors.map((doctor, index) => (
                   <DoctorCard key={index} doctor={doctor} />
                 ))}
+                
+                {filteredDoctors.length > doctorsPerPage && (
+                  <div className="mt-6 flex justify-center">
+                    <div className="flex space-x-1 items-center">
+                      {renderPaginationButtons()}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
