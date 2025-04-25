@@ -1,4 +1,3 @@
-// src/components/AutoComplete/index.jsx
 import { useState, useEffect, useRef } from 'react';
 
 const AutoComplete = ({ doctors, searchTerm, onSearchChange }) => {

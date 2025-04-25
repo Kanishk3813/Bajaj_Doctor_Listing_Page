@@ -1,4 +1,3 @@
-// src/components/Layout/index.jsx
 const Layout = ({ children }) => {
     return (
       <div className="min-h-screen bg-gray-100">

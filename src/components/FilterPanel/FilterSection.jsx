@@ -1,4 +1,3 @@
-// src/components/FilterPanel/FilterSection.jsx
 const FilterSection = ({ title, children, isOpen = true, toggleOpen, testId }) => {
     return (
       <div className="border-b pb-4 mb-4">

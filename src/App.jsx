@@ -1,13 +1,13 @@
-// src/App.jsx 
 import { useState, useEffect } from 'react';
-import Layout from './components/Layout';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AutoComplete from './components/AutoComplete';
 import FilterPanel from './components/FilterPanel';
 import DoctorCard from './components/DoctorCard';
+import BookAppointment from './pages/BookAppointment';
 import { fetchDoctors } from './api';
 import { useFilters } from './hooks/useFilters';
 
-function App() {
+function DoctorListing() {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -121,6 +121,18 @@ function App() {
         </div>
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<DoctorListing />} />
+        <Route path="/book-appointment/:doctorId" element={<BookAppointment />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 

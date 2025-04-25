@@ -1,4 +1,3 @@
-// src/hooks/useUrlParams.js
 import { useEffect, useState } from 'react';
 
 export const useUrlParams = (filters, setFilters) => {

@@ -1,4 +1,3 @@
-// src/hooks/useFilters.js
 import { useState, useEffect } from 'react';
 import { filterDoctors } from '../utils/filterUtils';
 import { sortDoctors } from '../utils/sortUtils';

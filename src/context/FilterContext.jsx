@@ -1,4 +1,3 @@
-// src/context/FilterContext.jsx
 import React, { createContext, useState, useContext } from 'react';
 
 const FilterContext = createContext();
