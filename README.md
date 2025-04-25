@@ -62,7 +62,7 @@ This project is a doctor listing web application that allows users to search for
 ## 🚀 Getting Started
 1. **Clone the Repository**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/Kanishk3813/Bajaj_Doctor_Listing_Page.git
    cd doctor-listing-app
    ```
 
