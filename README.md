@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Doctor Listing Page Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🩺 Overview
+This project is a doctor listing web application that allows users to search for doctors, filter by consultation type and specialties, and sort results based on fees or experience. The app fetches doctor data from an API and performs all filtering operations on the client side. Users can also view detailed doctor profiles and book appointments seamlessly.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ Features Implemented
 
-### `npm start`
+### 1. 🔍 Autocomplete Search Bar
+- Real-time suggestions while typing doctor names
+- Displays top 3 matching results
+- Filters the doctor list when a suggestion is selected or Enter is pressed
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. 🎛️ Dynamic Filter Panel
+- **Single Select Filters**:
+  - Consultation type: Video Consult, In Clinic
+- **Multi-Select Filters**:
+  - Doctor specialties with checkboxes for multiple selections
+- **Sort Options**:
+  - Fees (Ascending)
+  - Experience (Descending)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 3. 👨‍⚕️ Doctor Listing
+- Displays doctor cards with:
+  - Name, specialties, qualification, and experience
+  - Available consultation types
+  - Clinic location (with map view)
+  - Fees and booking functionality
 
-### `npm test`
+### 4. 📅 Appointment Booking
+- Multi-step booking process:
+  - Select date, time, consultation type
+  - Enter patient details
+  - Review and confirm appointment
+- Form validation included
+- Confirmation page after successful booking
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 5. 🔗 URL Query Parameters
+- Applied filters are reflected in the URL
+- Browser navigation (back/forward) maintains filter state
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Technical Implementation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 🛠️ API Integration
+- Data fetched from:  
+  [Doctor Data API](https://srijandubey.github.io/campus-api-mock/SRM-C1-25.json)
+- All search, filter, and sort operations are done **client-side** after the initial fetch
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ✅ Test Case Support
+- Implemented `data-testid` attributes for automated testing
+- Followed the required naming conventions as per specifications
 
-### `npm run eject`
+### 📱 Responsive Design
+- Fully mobile-friendly
+- Clean, intuitive UI with proper layout and grid systems
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🚀 Getting Started
+1. **Clone the Repository**
+   ```bash
+   git clone <repo-url>
+   cd doctor-listing-app
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. **Start the Development Server**
+   ```bash
+   npm start
+   ```
 
-## Learn More
+4. **Open in Browser**
+   ```
+   http://localhost:3000
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔍 Features Prioritized
+As per requirements, functionality has been given more weightage than UI. The application ensures:
+- All filters work in combination
+- Search and filter operations are performed client-side
+- URL query parameters reflect applied filters
+- Browser navigation maintains filter state
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🔮 Future Enhancements
+- Add pagination for large result sets
+- Implement doctor ratings and reviews
+- Enhance appointment booking with real-time availability
+- Add user authentication for personalized experience
+- Integrate payment gateway for booking confirmations
+- Add multilingual support for wider accessibility

@@ -602,7 +602,6 @@ useEffect(() => {
                       <div>
                         <p className="text-sm text-gray-500">Doctor</p>
                         <p className="font-medium">{doctor.name}</p>
-                        // Continuing from where the code left off in BookAppointment.jsx
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">Date & Time</p>
